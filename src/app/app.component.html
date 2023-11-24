@@ -1,0 +1,46 @@
+<form [formGroup]="formulario" (ngSubmit)="enviarFormulario()" class="formulario-container mat-typography centralizado">
+
+  <mat-form-field class="campo-container">
+    <mat-label class="label-pequena">Quantidade de Horas</mat-label>
+    <input matInput type="number" placeholder="Maximo: 60h" formControlName="horas">
+  </mat-form-field>
+
+  <mat-form-field class="campo-container">
+    <mat-label class="label-pequena">Dimensão</mat-label>
+    <mat-select placeholder="Selecione a dimensão" formControlName="dimensao">
+      <mat-option value="opcao1">Sociais</mat-option>
+      <mat-option value="opcao2">Acadêmicas e Científicas</mat-option>
+      <mat-option value="opcao2">Culturais</mat-option>
+      <mat-option value="opcao2">Comunitárias e Coletivas</mat-option>
+      <mat-option value="opcao2">Outros</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="campo-container">
+    <mat-label class="label-pequena">Atividade</mat-label>
+    <input matInput placeholder="Maximo: 50 caracteres" formControlName="tipoAtividade">
+  </mat-form-field>
+
+  <button mat-raised-button color="accent" type="submit">Carregar</button>
+</form>
+
+<table mat-table [dataSource]="listaDeRegistros"> // (mat-table) contêiner principal para a tabela
+
+  <ng-container matColumnDef="horas">
+    <th mat-header-cell *matHeaderCellDef> Horas </th>
+    <td mat-cell *matCellDef="let registro"> {{ registro.horas }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="dimensao">
+    <th mat-header-cell *matHeaderCellDef> Tipo de atividade </th>
+    <td mat-cell *matCellDef="let registro"> {{ registro.dimensao }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="tipoAtividade">
+    <th mat-header-cell *matHeaderCellDef> Discrição da atividade </th>
+    <td mat-cell *matCellDef="let registro"> {{ registro.tipoAtividade }} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['horas', 'dimensao', 'tipoAtividade']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['horas', 'dimensao', 'tipoAtividade']"></tr>
+</table>
